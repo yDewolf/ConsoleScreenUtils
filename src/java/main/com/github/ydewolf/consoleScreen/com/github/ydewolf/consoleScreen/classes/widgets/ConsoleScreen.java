@@ -13,10 +13,10 @@ public class ConsoleScreen extends Widget implements ScreenInterface {
 
     @Override
     public String[][] getMasked() {
-        String[][] final_screen = new String[super.SIZE_Y][super.SIZE_X];
+        String[][] final_screen = new String[super.size[1]][super.size[0]];
         
-        for (int y = 0; y < super.SIZE_Y; y++) {
-            for (int x = 0; x < super.SIZE_X; x++) {
+        for (int y = 0; y < super.size[1]; y++) {
+            for (int x = 0; x < super.size[0]; x++) {
                 if (super.content[y][x] > screen_mask.length || super.content[y][x] < 0) {
                     System.err.println("ERROR: Can't apply Screen Mask | Value at this.content can't be mapped");
                     return final_screen;
@@ -33,9 +33,9 @@ public class ConsoleScreen extends Widget implements ScreenInterface {
         String[][] screen_matrix = getMasked();
 
         String stringified = "";
-        for (int y = 0; y < super.SIZE_Y; y++) {
+        for (int y = 0; y < super.size[1]; y++) {
             String row_str = "";
-            for (int x = 0; x < super.SIZE_X; x++) {
+            for (int x = 0; x < super.size[0]; x++) {
                 row_str += screen_matrix[y][x];
             }
 

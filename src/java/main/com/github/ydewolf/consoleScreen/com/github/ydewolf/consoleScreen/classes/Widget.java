@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import com.github.ydewolf.consoleScreen.interfaces.WidgetInterface;
 
 public class Widget implements WidgetInterface {
-    public int SIZE_X;
-    public int SIZE_Y;
     public int[] size;
 
     public int[] offset = new int[2];
@@ -15,13 +13,10 @@ public class Widget implements WidgetInterface {
     public ArrayList<Widget> widgets = new ArrayList<Widget>();
     
     public Widget(int size_x, int size_y, boolean fill_grid) {
-        this.SIZE_X = size_x;
-        this.SIZE_Y = size_y;
-        
-        int[] size = {SIZE_X, SIZE_Y};
+        int[] size = {size_x, size_y};
         this.size = size;
 
-        this.content = new int[this.SIZE_Y][this.SIZE_X];
+        this.content = new int[size[1]][size[0]];
         if (fill_grid) {
             fill_grid();
         }
@@ -32,9 +27,22 @@ public class Widget implements WidgetInterface {
         this.content[pos[1]][pos[0]] = value;
     }
 
+    public void set_size(int[] size) {
+        this.size = size;
+
+        this.content = new int[this.size[1]][this.size[0]];
+    }
+
+    public void set_size(int x, int y) {
+        this.size[0] = x;
+        this.size[1] = y;
+
+        this.content = new int[this.size[1]][this.size[0]];
+    }
+
     public void clearContent() {
         for (int[] row : this.content) {
-            for (int x = 0; x < this.SIZE_X; x++) {
+            for (int x = 0; x < this.size[0]; x++) {
                 row[x] = 0;
             }
         }
@@ -74,7 +82,7 @@ public class Widget implements WidgetInterface {
         int current_y_offset = 0;
         for (Widget widget : this.widgets) {
             widget.offset[1] = current_y_offset;
-            current_y_offset += widget.SIZE_Y;
+            current_y_offset += widget.size[1];
         }
 
         for (Widget widget : this.widgets) {
@@ -84,8 +92,8 @@ public class Widget implements WidgetInterface {
 
     // Maps the widget content to this.content using its offset
     public void mapWidget(Widget widget) {
-        for (int y = 0; y < widget.SIZE_Y; y++) {
-            for (int x = 0; x < widget.SIZE_X; x++) {
+        for (int y = 0; y < widget.size[1]; y++) {
+            for (int x = 0; x < widget.size[0]; x++) {
                 this.content[y + widget.offset[1]][x + widget.offset[0]] = widget.content[y][x];
             }
         }
@@ -95,8 +103,8 @@ public class Widget implements WidgetInterface {
 
     private void fill_grid() {
         int count = 1;
-        for (int y = 0; y < this.SIZE_Y; y++) {
-            for (int x = 0; x < this.SIZE_X; x++) {
+        for (int y = 0; y < this.size[1]; y++) {
+            for (int x = 0; x < this.size[0]; x++) {
                 int[] pos = {x, y};
                 set_pos_value(pos, count);;
 

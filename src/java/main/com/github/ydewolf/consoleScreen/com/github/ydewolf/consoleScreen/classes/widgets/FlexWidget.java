@@ -6,10 +6,44 @@ import enums.FlexDirection;
 
 public class FlexWidget extends Widget {
     FlexDirection direction;
-
+    public boolean[] auto_resize = {false, false};
+    
     public FlexWidget(int size_x, int size_y, FlexDirection flex_direction) {
         super(size_x, size_y, false);
+        
+        auto_resize[0] = size_x == 0;
+        auto_resize[1] = size_y == 0;
+
         this.direction = flex_direction;
+    }
+
+    @Override
+    public int addWidget(Widget widget) {
+        int idx = super.addWidget(widget);
+        
+        // Update size
+        for (int axis = 0; axis < 2; axis++) {
+            if (auto_resize[axis]) {
+                
+                int[] total_size = {this.size[0], this.size[1]};
+                if (this.direction.ordinal() != axis) {
+                    // If the grow direction is different from the axis,
+                    // The size of this axis should be the greater widget size
+                    for (Widget wdgt : this.widgets) {
+                        total_size[axis] = wdgt.size[axis] > total_size[axis] ? wdgt.size[axis] : total_size[axis];
+                    }
+
+                } else {
+                    for (Widget wdgt : this.widgets) {
+                        total_size[axis] += wdgt.size[axis];
+                    }
+                }
+        
+                set_size(total_size);
+            }
+        }
+
+        return idx;
     }
 
     @Override
