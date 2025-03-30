@@ -2,6 +2,8 @@ package com.github.ydewolf.consoleScreen.classes;
 
 import java.util.ArrayList;
 
+import com.github.ydewolf.consoleScreen.enums.FillTypes;
+import com.github.ydewolf.consoleScreen.enums.MaskIndexes;
 import com.github.ydewolf.consoleScreen.interfaces.WidgetInterface;
 
 public class Widget implements WidgetInterface {
@@ -12,14 +14,12 @@ public class Widget implements WidgetInterface {
     public int[][] content;
     public ArrayList<Widget> widgets = new ArrayList<Widget>();
     
-    public Widget(int size_x, int size_y, boolean fill_grid) {
+    public Widget(int size_x, int size_y, FillTypes fill_type) {
         int[] size = {size_x, size_y};
         this.size = size;
 
         this.content = new int[size[1]][size[0]];
-        if (fill_grid) {
-            fill_grid();
-        }
+        select_fill_type(fill_type);
     }
 
     @Override
@@ -101,6 +101,23 @@ public class Widget implements WidgetInterface {
 
     // Utils
 
+    private void select_fill_type(FillTypes type) {
+        if (type == null) {return;};
+        switch (type) {
+            case FillTypes.CHECKERS:
+                fill_grid();
+                break;
+            
+            case FillTypes.BORDER:
+                apply_border();
+                break;
+        
+
+            default:
+                break;
+        }
+    }
+
     private void fill_grid() {
         int count = 1;
         for (int y = 0; y < this.size[1]; y++) {
@@ -113,6 +130,40 @@ public class Widget implements WidgetInterface {
                     count = 1;
                 }
             }
+        }
+    }
+
+    // Destructive
+    private void apply_border() {
+        final int[][] CORNERS = {
+            {0, 0},
+            {0, this.size[1] - 1},
+            {this.size[0] - 1, 0},
+            {this.size[0] - 1, this.size[1] - 1}
+        };
+
+        for (int y = 0; y < this.size[1]; y++) {
+            for (int x = 0; x < this.size[0]; x++) {
+                int[] pos = {x, y};
+                if (x == 0 || x == this.size[0] - 1) {
+                    set_pos_value(pos, MaskIndexes.BORDER_SIDE.ordinal());
+                    continue;
+                }
+
+                if (y == 0) {
+                    set_pos_value(pos, MaskIndexes.BORDER_TOP.ordinal());
+                    continue;
+                }
+
+                if (y == this.size[1] - 1) {
+                    set_pos_value(pos, MaskIndexes.BORDER_BOTTOM.ordinal());
+                }
+            }
+        }
+
+
+        for (int[] pos : CORNERS) {
+            set_pos_value(pos, MaskIndexes.CORNER.ordinal());
         }
     }
 }

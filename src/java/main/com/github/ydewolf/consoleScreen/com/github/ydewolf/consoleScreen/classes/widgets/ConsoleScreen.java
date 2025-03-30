@@ -7,7 +7,7 @@ public class ConsoleScreen extends Widget implements ScreenInterface {
     public String[] screen_mask = {};
 
     public ConsoleScreen(int size_x, int size_y, String[] mask) {
-        super(size_x, size_y, false);
+        super(size_x, size_y, null);
         this.screen_mask = mask;
     }
 

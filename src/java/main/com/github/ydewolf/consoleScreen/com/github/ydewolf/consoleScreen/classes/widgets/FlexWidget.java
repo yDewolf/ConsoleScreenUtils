@@ -1,15 +1,14 @@
 package com.github.ydewolf.consoleScreen.classes.widgets;
 
 import com.github.ydewolf.consoleScreen.classes.Widget;
-
-import enums.FlexDirection;
+import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 
 public class FlexWidget extends Widget {
     FlexDirection direction;
     public boolean[] auto_resize = {false, false};
-    
+
     public FlexWidget(int size_x, int size_y, FlexDirection flex_direction) {
-        super(size_x, size_y, false);
+        super(size_x, size_y, null);
         
         auto_resize[0] = size_x == 0;
         auto_resize[1] = size_y == 0;
@@ -20,8 +19,21 @@ public class FlexWidget extends Widget {
     @Override
     public int addWidget(Widget widget) {
         int idx = super.addWidget(widget);
-        
-        // Update size
+        update_size();
+
+        return idx;
+    }
+
+    @Override
+    public boolean removeWidget(int idx) {
+        boolean result = super.removeWidget(idx);
+        update_size();
+
+        return result;
+    }
+
+
+    private void update_size() {
         for (int axis = 0; axis < 2; axis++) {
             if (auto_resize[axis]) {
                 
@@ -42,8 +54,6 @@ public class FlexWidget extends Widget {
                 set_size(total_size);
             }
         }
-
-        return idx;
     }
 
     @Override
