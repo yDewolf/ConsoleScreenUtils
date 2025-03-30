@@ -7,17 +7,24 @@ import com.github.ydewolf.consoleScreen.interfaces.WidgetInterface;
 public class Widget implements WidgetInterface {
     public int SIZE_X;
     public int SIZE_Y;
+    public int[] size;
 
     public int[] offset = new int[2];
 
     public int[][] content;
     public ArrayList<Widget> widgets = new ArrayList<Widget>();
     
-    public Widget(int size_x, int size_y) {
+    public Widget(int size_x, int size_y, boolean fill_grid) {
         this.SIZE_X = size_x;
         this.SIZE_Y = size_y;
+        
+        int[] size = {SIZE_X, SIZE_Y};
+        this.size = size;
 
         this.content = new int[this.SIZE_Y][this.SIZE_X];
+        if (fill_grid) {
+            fill_grid();
+        }
     }
 
     @Override
@@ -80,6 +87,23 @@ public class Widget implements WidgetInterface {
         for (int y = 0; y < widget.SIZE_Y; y++) {
             for (int x = 0; x < widget.SIZE_X; x++) {
                 this.content[y + widget.offset[1]][x + widget.offset[0]] = widget.content[y][x];
+            }
+        }
+    }
+
+    // Utils
+
+    private void fill_grid() {
+        int count = 1;
+        for (int y = 0; y < this.SIZE_Y; y++) {
+            for (int x = 0; x < this.SIZE_X; x++) {
+                int[] pos = {x, y};
+                set_pos_value(pos, count);;
+
+                count++;
+                if (count > 2) {
+                    count = 1;
+                }
             }
         }
     }

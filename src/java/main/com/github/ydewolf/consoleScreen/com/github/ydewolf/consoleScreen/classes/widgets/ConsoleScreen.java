@@ -1,15 +1,13 @@
-package com.github.ydewolf.consoleScreen.classes;
+package com.github.ydewolf.consoleScreen.classes.widgets;
 
+import com.github.ydewolf.consoleScreen.classes.Widget;
 import com.github.ydewolf.consoleScreen.interfaces.ScreenInterface;
 
 public class ConsoleScreen extends Widget implements ScreenInterface {
-    // public int[][] screen = new int[SIZE_X][SIZE_Y];
-    // public int[][] content;
-
     public String[] screen_mask = {};
 
     public ConsoleScreen(int size_x, int size_y, String[] mask) {
-        super(size_x, size_y);
+        super(size_x, size_y, false);
         this.screen_mask = mask;
     }
 
