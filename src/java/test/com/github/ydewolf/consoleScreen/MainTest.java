@@ -6,7 +6,7 @@ import com.github.ydewolf.consoleScreen.classes.widgets.FlexWidget;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 
-public class Main {
+public class MainTest {
     public static void main(String[] args) {
         FlexWidget flex_widget = new FlexWidget(0, 15, FlexDirection.COLUMN);
         FlexWidget flex_widget2 = new FlexWidget(50, 15, FlexDirection.ROW);
