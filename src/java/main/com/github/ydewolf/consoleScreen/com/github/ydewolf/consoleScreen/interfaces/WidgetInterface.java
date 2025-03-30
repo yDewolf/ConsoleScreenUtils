@@ -1,5 +1,6 @@
 package com.github.ydewolf.consoleScreen.interfaces;
 
+import com.github.ydewolf.consoleScreen.classes.style.Style;
 import java.util.ArrayList;
 
 import com.github.ydewolf.consoleScreen.classes.Widget;
@@ -11,7 +12,12 @@ public interface WidgetInterface {
     public int[][] content = new int[size[1]][size[0]];
     public ArrayList<Widget> widgets = new ArrayList<Widget>();
 
+    public Style style = new Style();
+
     public void set_pos_value(int[] pos, int value);
+
+    public Style get_style();
+    public void set_style(Style style);
 
     public void set_size(int[] size);
     public void set_size(int x, int y);

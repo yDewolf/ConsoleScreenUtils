@@ -37,17 +37,17 @@ public class FlexWidget extends Widget {
         for (int axis = 0; axis < 2; axis++) {
             if (auto_resize[axis]) {
                 
-                int[] total_size = {this.size[0], this.size[1]};
+                int[] total_size = {this.style.size[0], this.style.size[1]};
                 if (this.direction.ordinal() != axis) {
                     // If the grow direction is different from the axis,
                     // The size of this axis should be the greater widget size
                     for (Widget wdgt : this.widgets) {
-                        total_size[axis] = wdgt.size[axis] > total_size[axis] ? wdgt.size[axis] : total_size[axis];
+                        total_size[axis] = wdgt.style.size[axis] > total_size[axis] ? wdgt.style.size[axis] : total_size[axis];
                     }
 
                 } else {
                     for (Widget wdgt : this.widgets) {
-                        total_size[axis] += wdgt.size[axis];
+                        total_size[axis] += wdgt.style.size[axis];
                     }
                 }
         
@@ -89,22 +89,22 @@ public class FlexWidget extends Widget {
         int total_size = 0;
 
         for (Widget widget : this.widgets) {
-            total_size += widget.size[axis];
+            total_size += widget.style.size[axis];
         }
 
-        spacing = get_equal_spacing(total_size, this.size[axis], this.widgets.size());
+        spacing = get_equal_spacing(total_size, this.style.size[axis], this.widgets.size());
         int current_offset = 0;
         for (int idx = 0; idx < this.widgets.size(); idx++) {
             Widget widget = this.widgets.get(idx);
-            widget.offset[axis] = current_offset + spacing;
+            widget.style.offset[axis] = current_offset + spacing;
 
-            current_offset = widget.offset[axis] + widget.size[axis] + (widget.size[axis] / this.size[axis]);
+            current_offset = widget.style.offset[axis] + widget.style.size[axis] + (widget.style.size[axis] / this.style.size[axis]);
         }
 
         // Do a final center considering the whole 'object' (all the objects already spaced)
-        int border_space = get_equal_spacing(total_size + spacing * (this.widgets.size() + 1), this.size[axis], 1);
+        int border_space = get_equal_spacing(total_size + spacing * (this.widgets.size() + 1), this.style.size[axis], 1);
         for (Widget widget : this.widgets) {
-            widget.offset[axis] += border_space;
+            widget.style.offset[axis] += border_space;
         }
     }
 
