@@ -16,7 +16,6 @@ public interface WidgetInterface {
 
     public void set_pos_value(int[] pos, int value);
 
-    public Style get_style();
     public void set_style(Style style);
 
     public void set_size(int[] size);

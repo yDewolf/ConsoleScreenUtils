@@ -1,19 +1,22 @@
 package com.github.ydewolf.consoleScreen.classes.widgets;
 
 import com.github.ydewolf.consoleScreen.classes.Widget;
+import com.github.ydewolf.consoleScreen.classes.style.FlexStyle;
+import com.github.ydewolf.consoleScreen.enums.AlignTypes;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 
 public class FlexWidget extends Widget {
-    FlexDirection direction;
+    // FlexDirection direction;
     public boolean[] auto_resize = {false, false};
+
+    public FlexStyle flex_style;
 
     public FlexWidget(int size_x, int size_y, FlexDirection flex_direction) {
         super(size_x, size_y, null);
+        this.flex_style = new FlexStyle(flex_direction, AlignTypes.LEFT);
         
         auto_resize[0] = size_x == 0;
         auto_resize[1] = size_y == 0;
-
-        this.direction = flex_direction;
     }
 
     @Override
@@ -38,16 +41,15 @@ public class FlexWidget extends Widget {
             if (auto_resize[axis]) {
                 
                 int[] total_size = {this.style.size[0], this.style.size[1]};
-                if (this.direction.ordinal() != axis) {
+                for (Widget wdgt : this.widgets) {
+                    int[] widget_size = wdgt.style.size;
                     // If the grow direction is different from the axis,
                     // The size of this axis should be the greater widget size
-                    for (Widget wdgt : this.widgets) {
-                        total_size[axis] = wdgt.style.size[axis] > total_size[axis] ? wdgt.style.size[axis] : total_size[axis];
-                    }
+                    if (this.flex_style.flex_direction.ordinal() != axis) {
+                        total_size[axis] = widget_size[axis] > total_size[axis] ? widget_size[axis] : total_size[axis];
 
-                } else {
-                    for (Widget wdgt : this.widgets) {
-                        total_size[axis] += wdgt.style.size[axis];
+                    } else {
+                        total_size[axis] += widget_size[axis];
                     }
                 }
         
@@ -60,7 +62,7 @@ public class FlexWidget extends Widget {
     public void mapWidgets() {
         this.clearContent();
 
-        flex_widgets(this.direction);
+        flex_widgets(this.flex_style.flex_direction);
 
         for (Widget widget : this.widgets) {
             mapWidget(widget);
@@ -96,9 +98,12 @@ public class FlexWidget extends Widget {
         int current_offset = 0;
         for (int idx = 0; idx < this.widgets.size(); idx++) {
             Widget widget = this.widgets.get(idx);
-            widget.style.offset[axis] = current_offset + spacing;
+            int[] offset = widget.style.offset;
+            int[] size = widget.style.size;
 
-            current_offset = widget.style.offset[axis] + widget.style.size[axis] + (widget.style.size[axis] / this.style.size[axis]);
+            offset[axis] = current_offset + spacing;
+
+            current_offset = offset[axis] + size[axis] + (widget.style.size[axis] / this.style.size[axis]);
         }
 
         // Do a final center considering the whole 'object' (all the objects already spaced)

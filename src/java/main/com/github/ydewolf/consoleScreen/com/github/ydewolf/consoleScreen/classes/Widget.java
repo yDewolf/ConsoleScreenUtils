@@ -8,10 +8,6 @@ import com.github.ydewolf.consoleScreen.enums.MaskIndexes;
 import com.github.ydewolf.consoleScreen.interfaces.WidgetInterface;
 
 public class Widget implements WidgetInterface {
-    // public int[] size;
-
-    // public int[] offset = new int[2];
-
     public int[][] content;
     public ArrayList<Widget> widgets = new ArrayList<Widget>();
 
@@ -34,11 +30,6 @@ public class Widget implements WidgetInterface {
     @Override
     public void set_pos_value(int[] pos, int value) {
         this.content[pos[1]][pos[0]] = value;
-    }
-
-    @Override
-    public Style get_style() {
-        return this.style;
     }
 
     @Override
@@ -111,9 +102,11 @@ public class Widget implements WidgetInterface {
 
     // Maps the widget content to this.content using its offset
     public void mapWidget(Widget widget) {
-        for (int y = 0; y < widget.style.size[1]; y++) {
-            for (int x = 0; x < widget.style.size[0]; x++) {
-                this.content[y + widget.style.offset[1]][x + widget.style.offset[0]] = widget.content[y][x];
+        Style widget_style = widget.style;
+        for (int y = 0; y < widget_style.size[1]; y++) {
+
+            for (int x = 0; x < widget_style.size[0]; x++) {
+                this.content[y + widget_style.offset[1]][x + widget_style.offset[0]] = widget.content[y][x];
             }
         }
     }
@@ -139,8 +132,10 @@ public class Widget implements WidgetInterface {
 
     private void fill_grid() {
         int count = 1;
-        for (int y = 0; y < this.style.size[1]; y++) {
-            for (int x = 0; x < this.style.size[0]; x++) {
+        int[] size = this.style.size;
+
+        for (int y = 0; y < size[1]; y++) {
+            for (int x = 0; x < size[0]; x++) {
                 int[] pos = {x, y};
                 set_pos_value(pos, count);;
 
@@ -154,17 +149,18 @@ public class Widget implements WidgetInterface {
 
     // Destructive
     private void apply_border() {
+        int[] size = this.style.size;
         final int[][] CORNERS = {
             {0, 0},
-            {0, this.style.size[1] - 1},
-            {this.style.size[0] - 1, 0},
-            {this.style.size[0] - 1, this.style.size[1] - 1}
+            {0, size[1] - 1},
+            {size[0] - 1, 0},
+            {size[0] - 1, size[1] - 1}
         };
 
-        for (int y = 0; y < this.style.size[1]; y++) {
-            for (int x = 0; x < this.style.size[0]; x++) {
+        for (int y = 0; y < size[1]; y++) {
+            for (int x = 0; x < size[0]; x++) {
                 int[] pos = {x, y};
-                if (x == 0 || x == this.style.size[0] - 1) {
+                if (x == 0 || x == size[0] - 1) {
                     set_pos_value(pos, MaskIndexes.BORDER_SIDE.ordinal());
                     continue;
                 }
@@ -174,7 +170,7 @@ public class Widget implements WidgetInterface {
                     continue;
                 }
 
-                if (y == this.style.size[1] - 1) {
+                if (y == size[1] - 1) {
                     set_pos_value(pos, MaskIndexes.BORDER_BOTTOM.ordinal());
                 }
             }
