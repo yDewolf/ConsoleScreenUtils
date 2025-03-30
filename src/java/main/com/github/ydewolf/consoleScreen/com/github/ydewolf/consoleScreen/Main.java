@@ -8,7 +8,7 @@ import enums.FlexDirection;
 
 public class Main {
     public static void main(String[] args) {
-        FlexWidget flex_widget = new FlexWidget(50, 10, FlexDirection.ROW);
+        FlexWidget flex_widget = new FlexWidget(50, 15, FlexDirection.COLUMN);
         String[] mask = {"_", "o", "."};
         ConsoleScreen root = new ConsoleScreen(50, 15, mask);
         root.addWidget(flex_widget);
@@ -19,9 +19,9 @@ public class Main {
         Widget widget4 = new Widget(5, 5, true);
 
         flex_widget.addWidget(widget1);
-        flex_widget.addWidget(widget2);
-        flex_widget.addWidget(widget3);
-        flex_widget.addWidget(widget4);
+        // flex_widget.addWidget(widget2);
+        // flex_widget.addWidget(widget3);
+        // flex_widget.addWidget(widget4);
         flex_widget.mapWidgets();
         
         // int count = 0;
