@@ -16,8 +16,8 @@ public class MainTest {
         
         Widget widget1 = new Widget(10, 5, FillTypes.BORDER);
         Widget widget2 = new Widget(5, 3, FillTypes.CHECKERS);
-        Widget widget3 = new Widget(5, 5, FillTypes.CHECKERS);
-        Widget widget4 = new Widget(5, 5, FillTypes.CHECKERS);
+        // Widget widget3 = new Widget(5, 5, FillTypes.CHECKERS);
+        // Widget widget4 = new Widget(5, 5, FillTypes.CHECKERS);
         
         
         flex_widget.addWidget(widget1);

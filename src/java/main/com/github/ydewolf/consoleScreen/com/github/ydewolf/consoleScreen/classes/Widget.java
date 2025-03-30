@@ -32,6 +32,10 @@ public class Widget implements WidgetInterface {
         this.content[pos[1]][pos[0]] = value;
     }
 
+    public ArrayList<Widget> getWidgets() {
+        return this.widgets;
+    }
+
     @Override
     public void set_style(Style style) {
         this.style = style;
@@ -113,7 +117,7 @@ public class Widget implements WidgetInterface {
 
     // Utils
 
-    private void select_fill_type(FillTypes type) {
+    protected void select_fill_type(FillTypes type) {
         if (type == null) {return;};
         switch (type) {
             case FillTypes.CHECKERS:
@@ -130,7 +134,7 @@ public class Widget implements WidgetInterface {
         }
     }
 
-    private void fill_grid() {
+    protected void fill_grid() {
         int count = 1;
         int[] size = this.style.size;
 
@@ -148,7 +152,7 @@ public class Widget implements WidgetInterface {
     }
 
     // Destructive
-    private void apply_border() {
+    protected void apply_border() {
         int[] size = this.style.size;
         final int[][] CORNERS = {
             {0, 0},

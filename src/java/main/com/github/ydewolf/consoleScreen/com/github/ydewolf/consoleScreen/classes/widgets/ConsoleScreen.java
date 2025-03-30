@@ -14,7 +14,7 @@ public class ConsoleScreen extends Widget implements ScreenInterface {
     @Override
     public String[][] getMasked() {
         String[][] final_screen = new String[super.style.size[1]][super.style.size[0]];
-        
+
         for (int y = 0; y < super.style.size[1]; y++) {
             for (int x = 0; x < super.style.size[0]; x++) {
                 if (super.content[y][x] > screen_mask.length || super.content[y][x] < 0) {
