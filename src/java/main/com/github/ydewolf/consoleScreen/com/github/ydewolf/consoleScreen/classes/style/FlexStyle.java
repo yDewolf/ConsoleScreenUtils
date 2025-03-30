@@ -4,7 +4,7 @@ import com.github.ydewolf.consoleScreen.enums.AlignTypes;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 import com.github.ydewolf.consoleScreen.interfaces.style.FlexStyleInterface;
 
-public class FlexStyle extends Style implements FlexStyleInterface{
+public class FlexStyle extends Style implements FlexStyleInterface {
     public FlexDirection flex_direction = FlexDirection.ROW;
     public AlignTypes align_type = AlignTypes.CENTER;
 

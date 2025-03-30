@@ -2,19 +2,19 @@ package com.github.ydewolf.consoleScreen.classes.widgets;
 
 import com.github.ydewolf.consoleScreen.classes.Widget;
 import com.github.ydewolf.consoleScreen.classes.style.FlexStyle;
-import com.github.ydewolf.consoleScreen.enums.AlignTypes;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 
 public class FlexWidget extends Widget {
     // FlexDirection direction;
     public boolean[] auto_resize = {false, false};
 
-    public FlexStyle flex_style;
+    public FlexStyle style;
 
     public FlexWidget(int size_x, int size_y, FlexDirection flex_direction) {
         super(size_x, size_y, null);
-        this.flex_style = new FlexStyle(flex_direction, AlignTypes.LEFT);
-        
+        this.style = new FlexStyle(super.style);
+        this.style.flex_direction = flex_direction;
+
         auto_resize[0] = size_x == 0;
         auto_resize[1] = size_y == 0;
     }
@@ -45,7 +45,7 @@ public class FlexWidget extends Widget {
                     int[] widget_size = wdgt.style.size;
                     // If the grow direction is different from the axis,
                     // The size of this axis should be the greater widget size
-                    if (this.flex_style.flex_direction.ordinal() != axis) {
+                    if (this.style.flex_direction.ordinal() != axis) {
                         total_size[axis] = widget_size[axis] > total_size[axis] ? widget_size[axis] : total_size[axis];
 
                     } else {
@@ -62,7 +62,7 @@ public class FlexWidget extends Widget {
     public void mapWidgets() {
         this.clearContent();
 
-        flex_widgets(this.flex_style.flex_direction);
+        flex_widgets(this.style.flex_direction);
 
         for (Widget widget : this.widgets) {
             mapWidget(widget);
