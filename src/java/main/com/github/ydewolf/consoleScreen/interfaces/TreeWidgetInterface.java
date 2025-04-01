@@ -1,10 +1,8 @@
 package com.github.ydewolf.consoleScreen.interfaces;
 
-import javax.swing.tree.TreeNode;
-
 import com.github.ydewolf.consoleScreen.interfaces.style.StyleInterface;
 
-public interface TreeWidgetInterface extends TreeNode {
+public interface TreeWidgetInterface {
     public static StyleInterface style = null;
     
     public int[][] content = {{}};

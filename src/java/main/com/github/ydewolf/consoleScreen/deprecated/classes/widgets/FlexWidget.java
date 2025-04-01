@@ -3,7 +3,7 @@ package com.github.ydewolf.consoleScreen.deprecated.classes.widgets;
 import com.github.ydewolf.consoleScreen.classes.style.FlexStyle;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 
-import deprecated.classes.Widget;
+import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
 
 public class FlexWidget extends Widget {
     // FlexDirection direction;

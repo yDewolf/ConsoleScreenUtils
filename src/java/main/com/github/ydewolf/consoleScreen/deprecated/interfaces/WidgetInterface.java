@@ -2,7 +2,7 @@ package com.github.ydewolf.consoleScreen.deprecated.interfaces;
 
 import com.github.ydewolf.consoleScreen.classes.style.Style;
 
-import deprecated.classes.Widget;
+import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
 
 import java.util.ArrayList;
 

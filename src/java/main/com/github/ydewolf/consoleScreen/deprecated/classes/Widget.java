@@ -6,7 +6,7 @@ import com.github.ydewolf.consoleScreen.classes.style.Style;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
 import com.github.ydewolf.consoleScreen.enums.MaskIndexes;
 
-import deprecated.interfaces.WidgetInterface;
+import com.github.ydewolf.consoleScreen.deprecated.interfaces.WidgetInterface;
 
 public class Widget implements WidgetInterface {
     public int[][] content;
