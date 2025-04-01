@@ -1,8 +1,9 @@
 package com.github.ydewolf.consoleScreen.SimpleUI.custom_widgets;
 
-import com.github.ydewolf.consoleScreen.classes.Widget;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
-import com.github.ydewolf.consoleScreen.interfaces.DynamicWidgetInterface;
+
+import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
+import com.github.ydewolf.consoleScreen.deprecated.interfaces.DynamicWidgetInterface;
 
 public class DynamicWidget extends Widget implements DynamicWidgetInterface {
 

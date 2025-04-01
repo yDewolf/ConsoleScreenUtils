@@ -1,10 +1,14 @@
-package com.github.ydewolf.consoleScreen.classes.widgets;
+package com.github.ydewolf.consoleScreen.deprecated.classes.widgets;
 
-import com.github.ydewolf.consoleScreen.classes.Widget;
-import com.github.ydewolf.consoleScreen.interfaces.ScreenInterface;
+import com.github.ydewolf.consoleScreen.classes.style.ScreenStyle;
+
+import deprecated.classes.Widget;
+import deprecated.interfaces.ScreenInterface;
 
 public class ConsoleScreen extends Widget implements ScreenInterface {
     public String[] screen_mask = {};
+
+    public ScreenStyle style;
 
     public ConsoleScreen(int size_x, int size_y, String[] mask) {
         super(size_x, size_y, null);

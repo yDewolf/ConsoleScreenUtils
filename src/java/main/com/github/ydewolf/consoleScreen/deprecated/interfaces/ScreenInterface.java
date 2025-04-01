@@ -1,4 +1,4 @@
-package com.github.ydewolf.consoleScreen.interfaces;
+package com.github.ydewolf.consoleScreen.deprecated.interfaces;
 
 // import java.util.ArrayList;
 

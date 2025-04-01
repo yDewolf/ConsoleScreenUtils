@@ -1,10 +1,11 @@
 package com.github.ydewolf.consoleScreen;
 
-import com.github.ydewolf.consoleScreen.classes.Widget;
-import com.github.ydewolf.consoleScreen.classes.widgets.ConsoleScreen;
-import com.github.ydewolf.consoleScreen.classes.widgets.FlexWidget;
+import com.github.ydewolf.consoleScreen.deprecated.classes.widgets.ConsoleScreen;
+import com.github.ydewolf.consoleScreen.deprecated.classes.widgets.FlexWidget;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
+
+import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
 
 public class MainTest {
     public static void main(String[] args) {

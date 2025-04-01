@@ -1,9 +1,10 @@
-package com.github.ydewolf.consoleScreen.interfaces;
+package com.github.ydewolf.consoleScreen.deprecated.interfaces;
 
 import com.github.ydewolf.consoleScreen.classes.style.Style;
-import java.util.ArrayList;
 
-import com.github.ydewolf.consoleScreen.classes.Widget;
+import deprecated.classes.Widget;
+
+import java.util.ArrayList;
 
 public interface WidgetInterface {
     public int[] size = new int[2];

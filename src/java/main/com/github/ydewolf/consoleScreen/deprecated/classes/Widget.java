@@ -1,11 +1,12 @@
-package com.github.ydewolf.consoleScreen.classes;
+package com.github.ydewolf.consoleScreen.deprecated.classes;
 
 import java.util.ArrayList;
 
 import com.github.ydewolf.consoleScreen.classes.style.Style;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
 import com.github.ydewolf.consoleScreen.enums.MaskIndexes;
-import com.github.ydewolf.consoleScreen.interfaces.WidgetInterface;
+
+import deprecated.interfaces.WidgetInterface;
 
 public class Widget implements WidgetInterface {
     public int[][] content;
