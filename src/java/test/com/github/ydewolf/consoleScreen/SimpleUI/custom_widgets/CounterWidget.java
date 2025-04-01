@@ -13,6 +13,8 @@ public class CounterWidget extends DynamicWidget {
 
     @Override
     public void on_frame_update(double delta) {
+        super.on_frame_update(delta);
+        
         clearContent();
         int[] origin = {1, 1};
         seconds += delta * 0.001;

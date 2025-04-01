@@ -12,6 +12,10 @@ public class DynamicWidget extends Widget implements DynamicWidgetInterface {
 
     @Override
     public void on_frame_update(double delta) {
-
+        for (Widget widget : this.getWidgets()) {
+            if (DynamicWidget.class.isAssignableFrom(widget.getClass())) {
+                ((DynamicWidget) widget).on_frame_update(delta);
+            }
+        }
     }
 }
