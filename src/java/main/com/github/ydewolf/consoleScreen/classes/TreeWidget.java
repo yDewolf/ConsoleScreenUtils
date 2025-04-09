@@ -2,13 +2,24 @@ package com.github.ydewolf.consoleScreen.classes;
 
 import com.github.ydewolf.consoleScreen.classes.structure.TreeNode;
 import com.github.ydewolf.consoleScreen.classes.style.Style;
-import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
+import com.github.ydewolf.consoleScreen.enums.FillTypes;
+import com.github.ydewolf.consoleScreen.enums.MaskIndexes;
 import com.github.ydewolf.consoleScreen.interfaces.TreeWidgetInterface;
 import com.github.ydewolf.consoleScreen.interfaces.style.StyleInterface;
 
 public class TreeWidget extends TreeNode implements TreeWidgetInterface{
     public Style style;
     public int[][] content;
+
+    public TreeWidget(int size_x, int size_y, FillTypes fill_type) {
+        Style style = new Style();
+        this.setStyle(style);
+
+        this.setSize(size_x, size_y);
+
+        this.content = new int[this.style.size[1]][this.style.size[0]];
+        this.selectFillType(fill_type);
+    }
 
     @Override
     public void setPos(int[] pos, int value) {
@@ -82,10 +93,73 @@ public class TreeWidget extends TreeNode implements TreeWidgetInterface{
         TreeWidget[] widgets = new TreeWidget[widget_amount];
         for (int idx = 0; idx < nodes.length; idx++) {
             if (TreeWidget.class.isAssignableFrom(nodes[idx].getClass())) {
-                nodes[idx] = nodes[idx];
+                widgets[idx] = (TreeWidget) nodes[idx];
             }
         }
 
         return widgets;
     }  
+
+    protected void selectFillType(FillTypes type) {
+        if (type == null) {return;};
+        switch (type) {
+            case FillTypes.CHECKERS -> fill_grid();
+            
+            case FillTypes.BORDER -> apply_border();
+
+            default -> {
+            }
+        }
+    }
+
+    protected void fill_grid() {
+        int count = 1;
+        int[] size = this.style.size;
+
+        for (int y = 0; y < size[1]; y++) {
+            for (int x = 0; x < size[0]; x++) {
+                int[] pos = {x, y};
+                setPos(pos, count);;
+
+                count++;
+                if (count > 2) {
+                    count = 1;
+                }
+            }
+        }
+    }
+
+    // Destructive
+    protected void apply_border() {
+        int[] size = this.style.size;
+        final int[][] CORNERS = {
+            {0, 0},
+            {0, size[1] - 1},
+            {size[0] - 1, 0},
+            {size[0] - 1, size[1] - 1}
+        };
+
+        for (int y = 0; y < size[1]; y++) {
+            for (int x = 0; x < size[0]; x++) {
+                int[] pos = {x, y};
+                if (x == 0 || x == size[0] - 1) {
+                    setPos(pos, MaskIndexes.BORDER_SIDE.ordinal());
+                    continue;
+                }
+
+                if (y == 0) {
+                    setPos(pos, MaskIndexes.BORDER_TOP.ordinal());
+                    continue;
+                }
+
+                if (y == size[1] - 1) {
+                    setPos(pos, MaskIndexes.BORDER_BOTTOM.ordinal());
+                }
+            }
+        }
+
+        for (int[] pos : CORNERS) {
+            setPos(pos, MaskIndexes.CORNER.ordinal());
+        }
+    }
 }

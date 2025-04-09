@@ -1,5 +1,6 @@
 package com.github.ydewolf.consoleScreen.interfaces.structure;
 
+import com.github.ydewolf.consoleScreen.classes.structure.NodeTree;
 import java.util.ArrayList;
 
 public interface TreeNodeInterface {
@@ -14,4 +15,6 @@ public interface TreeNodeInterface {
 
     public TreeNodeInterface getNode(int idx);
     public TreeNodeInterface[] getNodes();
+
+    public void setTree(NodeTreeInterface tree);
 }

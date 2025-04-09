@@ -1,5 +1,6 @@
 package com.github.ydewolf.consoleScreen.classes.structure;
 
+import com.github.ydewolf.consoleScreen.interfaces.structure.NodeTreeInterface;
 import java.util.ArrayList;
 
 import com.github.ydewolf.consoleScreen.interfaces.structure.TreeNodeInterface;
@@ -31,10 +32,17 @@ public class TreeNode implements TreeNodeInterface {
     public TreeNode[] getNodes() {
         TreeNode[] tree_nodes = this.tree.getNodes();
         TreeNode[] nodes = new TreeNode[this.child_nodes.size()];
-        for (int idx : child_nodes) {
-            nodes[idx] = tree_nodes[idx];
+        int current_idx = 0;
+        for (int idx : this.child_nodes) {
+            nodes[current_idx] = tree_nodes[idx];
+            current_idx++;
         }
 
         return nodes;
+    }
+
+    @Override
+    public void setTree(NodeTreeInterface tree) {
+        this.tree = (NodeTree) tree;
     }
 }

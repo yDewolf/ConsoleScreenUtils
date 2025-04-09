@@ -1,5 +1,6 @@
 package com.github.ydewolf.consoleScreen.deprecated.interfaces;
 
+import com.github.ydewolf.consoleScreen.classes.structure.NodeTree;
 import com.github.ydewolf.consoleScreen.classes.style.Style;
 
 import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
