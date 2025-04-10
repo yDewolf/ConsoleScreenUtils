@@ -1,10 +1,6 @@
 package com.github.ydewolf.consoleScreen.interfaces.structure;
 
-import java.util.ArrayList;
-
 public interface NodeTreeInterface extends TreeNodeInterface {
-    public static ArrayList<TreeNodeInterface> all_nodes = new ArrayList<TreeNodeInterface>();
-
     /*
         The two functions below should be called by: 
             TreeNodeInterface.addWidget

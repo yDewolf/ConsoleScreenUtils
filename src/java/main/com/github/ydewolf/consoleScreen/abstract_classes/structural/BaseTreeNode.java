@@ -1,12 +1,12 @@
-package com.github.ydewolf.consoleScreen.classes.structure;
+package com.github.ydewolf.consoleScreen.abstract_classes.structural;
 
-import com.github.ydewolf.consoleScreen.interfaces.structure.NodeTreeInterface;
 import java.util.ArrayList;
 
+import com.github.ydewolf.consoleScreen.interfaces.structure.NodeTreeInterface;
 import com.github.ydewolf.consoleScreen.interfaces.structure.TreeNodeInterface;
 
-public class TreeNode implements TreeNodeInterface {
-    protected NodeTree tree = null;
+public abstract class BaseTreeNode implements TreeNodeInterface{
+    protected BaseNodeTree tree = null;
     protected ArrayList<Integer> child_nodes = new ArrayList<Integer>();
 
     @Override
@@ -32,14 +32,14 @@ public class TreeNode implements TreeNodeInterface {
     }
 
     @Override
-    public TreeNode getNode(int idx) {
+    public BaseTreeNode getNode(int idx) {
         return getNodes()[idx];   
     }
     
     @Override
-    public TreeNode[] getNodes() {
-        TreeNode[] tree_nodes = this.tree.getNodes();
-        TreeNode[] nodes = new TreeNode[this.child_nodes.size()];
+    public BaseTreeNode[] getNodes() {
+        BaseTreeNode[] tree_nodes = this.tree.getNodes();
+        BaseTreeNode[] nodes = new BaseTreeNode[this.child_nodes.size()];
         int current_idx = 0;
         for (int idx : this.child_nodes) {
             nodes[current_idx] = tree_nodes[idx];
@@ -51,6 +51,6 @@ public class TreeNode implements TreeNodeInterface {
 
     @Override
     public void setTree(NodeTreeInterface tree) {
-        this.tree = (NodeTree) tree;
+        this.tree = (BaseNodeTree) tree;
     }
 }

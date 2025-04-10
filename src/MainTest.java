@@ -1,7 +1,7 @@
 
 import com.github.ydewolf.consoleScreen.classes.TreeWidget;
 import com.github.ydewolf.consoleScreen.classes.WidgetScreen;
-import com.github.ydewolf.consoleScreen.classes.structure.NodeTree;
+import com.github.ydewolf.consoleScreen.classes.structural.NodeTree;
 import com.github.ydewolf.consoleScreen.classes.FlexWidget;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;

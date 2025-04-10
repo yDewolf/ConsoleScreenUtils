@@ -1,24 +1,33 @@
 package com.github.ydewolf.consoleScreen.classes;
 
-import com.github.ydewolf.consoleScreen.classes.structure.TreeNode;
+import com.github.ydewolf.consoleScreen.abstract_classes.structural.BaseTreeNode;
 import com.github.ydewolf.consoleScreen.classes.style.Style;
 import com.github.ydewolf.consoleScreen.enums.FillTypes;
 import com.github.ydewolf.consoleScreen.enums.MaskIndexes;
 import com.github.ydewolf.consoleScreen.interfaces.TreeWidgetInterface;
 import com.github.ydewolf.consoleScreen.interfaces.style.StyleInterface;
 
-public class TreeWidget extends TreeNode implements TreeWidgetInterface{
+public class TreeWidget extends BaseTreeNode implements TreeWidgetInterface{
     public Style style;
     public int[][] content;
 
     public TreeWidget(int size_x, int size_y, FillTypes fill_type) {
-        Style style = new Style();
-        this.setStyle(style);
-
-        this.setSize(size_x, size_y);
+        Style style = new Style(size_x, size_y, fill_type);
+        this.style = style;
 
         this.content = new int[this.style.size[1]][this.style.size[0]];
-        this.selectFillType(fill_type);
+        this.selectFillType(style.fill_type);
+        this.init();
+    }
+
+    public TreeWidget(Style style) {
+        this.style = style;
+        this.init();
+    }
+
+    protected void init() {
+        this.content = new int[this.style.size[1]][this.style.size[0]];
+        this.selectFillType(style.fill_type);
     }
 
     @Override
@@ -83,8 +92,8 @@ public class TreeWidget extends TreeNode implements TreeWidgetInterface{
     
     protected TreeWidget[] getWidgets() {
         int widget_amount = 0;
-        TreeNode[] nodes = this.getNodes();
-        for (TreeNode node : nodes) {
+        BaseTreeNode[] nodes = this.getNodes();
+        for (BaseTreeNode node : nodes) {
             if (TreeWidget.class.isAssignableFrom(node.getClass())) {
                 widget_amount++;
             }

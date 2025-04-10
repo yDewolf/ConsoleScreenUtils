@@ -3,10 +3,6 @@ package com.github.ydewolf.consoleScreen.interfaces;
 import com.github.ydewolf.consoleScreen.interfaces.style.StyleInterface;
 
 public interface TreeWidgetInterface {
-    public static StyleInterface style = null;
-    
-    public int[][] content = {{}};
-
     public void setPos(int[] pos, int value);
 
     public void setStyle(StyleInterface style);

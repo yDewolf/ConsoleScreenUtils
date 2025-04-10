@@ -1,13 +1,13 @@
-package com.github.ydewolf.consoleScreen.classes.structure;
+package com.github.ydewolf.consoleScreen.abstract_classes.structural;
 
 import java.util.ArrayList;
 
 import com.github.ydewolf.consoleScreen.interfaces.structure.NodeTreeInterface;
 import com.github.ydewolf.consoleScreen.interfaces.structure.TreeNodeInterface;
 
-public class NodeTree extends TreeNode implements NodeTreeInterface {
-    private ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
-    private int node_count = 0;
+public abstract class BaseNodeTree extends BaseTreeNode implements NodeTreeInterface {
+    protected ArrayList<BaseTreeNode> nodes = new ArrayList<BaseTreeNode>();
+    protected int node_count = 0;
 
     @Override
     public void listen_remove(int node_idx) {
@@ -19,7 +19,7 @@ public class NodeTree extends TreeNode implements NodeTreeInterface {
 
     @Override
     public int addNode(TreeNodeInterface node) {
-        this.nodes.add((TreeNode) node);
+        this.nodes.add((BaseTreeNode) node);
         node.setTree(this);
         int node_idx = this.nodes.size() - 1;
 
@@ -37,15 +37,15 @@ public class NodeTree extends TreeNode implements NodeTreeInterface {
     }
     
     @Override
-    public TreeNode getNode(int node_idx) {
-        TreeNode node = this.nodes.get(node_idx);
+    public BaseTreeNode getNode(int node_idx) {
+        BaseTreeNode node = this.nodes.get(node_idx);
 
         return node;
     }
 
     @Override
-    public TreeNode[] getNodes() {
-        TreeNode[] nodes = new TreeNode[this.nodes.size()];
+    public BaseTreeNode[] getNodes() {
+        BaseTreeNode[] nodes = new BaseTreeNode[this.nodes.size()];
         for (int idx = 0; idx < this.nodes.size(); idx++) {
             nodes[idx] = this.nodes.get(idx);
         }
@@ -53,7 +53,7 @@ public class NodeTree extends TreeNode implements NodeTreeInterface {
         return nodes;
     }
 
-    public ArrayList<TreeNode> getNodeList() {
+    public ArrayList<BaseTreeNode> getNodeList() {
         return this.nodes;
     }
 
@@ -61,8 +61,7 @@ public class NodeTree extends TreeNode implements NodeTreeInterface {
         return this.node_count;
     } 
 
-    private void setNodeCount(int value) {
+    protected void setNodeCount(int value) {
         this.node_count = value;
     }
-
 }

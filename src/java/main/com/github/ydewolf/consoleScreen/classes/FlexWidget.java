@@ -1,6 +1,7 @@
 package com.github.ydewolf.consoleScreen.classes;
 
 import com.github.ydewolf.consoleScreen.classes.style.FlexStyle;
+import com.github.ydewolf.consoleScreen.classes.style.Style;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 import com.github.ydewolf.consoleScreen.interfaces.structure.TreeNodeInterface;
 
@@ -11,11 +12,20 @@ public boolean[] auto_resize = {false, false};
 
     public FlexWidget(int size_x, int size_y, FlexDirection flex_direction) {
         super(size_x, size_y, null);
+        this.init(flex_direction);
+    }
+
+    public FlexWidget(Style style, FlexDirection flex_direction) {
+        super(style);
+        this.init(flex_direction);
+    }
+
+    public void init(FlexDirection flex_direction) {
         this.style = new FlexStyle(super.style);
         this.style.flex_direction = flex_direction;
 
-        auto_resize[0] = size_x == 0;
-        auto_resize[1] = size_y == 0;
+        auto_resize[0] = this.style.size[0] == 0;
+        auto_resize[1] = this.style.size[1] == 0;
     }
 
     @Override
