@@ -7,11 +7,14 @@ import com.github.ydewolf.consoleScreen.interfaces.structure.TreeNodeInterface;
 
 public class NodeTree extends TreeNode implements NodeTreeInterface {
     private ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
+    private int node_count = 0;
 
     @Override
     public void listen_remove(int node_idx) {
-        super.child_nodes.remove((Object) node_idx);
+        super.child_nodes.remove(node_idx);
         this.nodes.remove(node_idx);
+
+        this.setNodeCount(this.nodes.size());
     }
 
     @Override
@@ -19,13 +22,16 @@ public class NodeTree extends TreeNode implements NodeTreeInterface {
         this.nodes.add((TreeNode) node);
         node.setTree(this);
         int node_idx = this.nodes.size() - 1;
+
+        this.setNodeCount(this.nodes.size());
         
-        return node_idx;
+        return node_idx;    
     }
 
     @Override
     public int listen_add(TreeNodeInterface parent, TreeNodeInterface node) {
         node.setTree(this);
+        this.setNodeCount(this.nodes.size());
 
         return this.addNode(node);
     }
@@ -46,4 +52,17 @@ public class NodeTree extends TreeNode implements NodeTreeInterface {
 
         return nodes;
     }
+
+    public ArrayList<TreeNode> getNodeList() {
+        return this.nodes;
+    }
+
+    public int getNodeCount() {
+        return this.node_count;
+    } 
+
+    private void setNodeCount(int value) {
+        this.node_count = value;
+    }
+
 }

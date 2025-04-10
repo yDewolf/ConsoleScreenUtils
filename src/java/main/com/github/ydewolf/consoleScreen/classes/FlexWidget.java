@@ -1,10 +1,6 @@
 package com.github.ydewolf.consoleScreen.classes;
 
 import com.github.ydewolf.consoleScreen.classes.style.FlexStyle;
-
-import com.github.ydewolf.consoleScreen.deprecated.classes.Widget;
-
-import com.github.ydewolf.consoleScreen.classes.TreeWidget;
 import com.github.ydewolf.consoleScreen.enums.FlexDirection;
 import com.github.ydewolf.consoleScreen.interfaces.structure.TreeNodeInterface;
 
